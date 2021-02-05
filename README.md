@@ -2,7 +2,7 @@
 
 …celebration website.
 
-<div style="text-align: center"><img src="10years"></div>
+<div style="text-align: center"><img src="10years.png"></div>
 
 ## Licenses
 
