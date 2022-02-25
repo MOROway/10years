@@ -160,6 +160,7 @@
           <div class="version-iframe">7.0</div>
           <div class="version-iframe">7.1</div>
           <div class="version-iframe">7.2</div>
+          <div class="version-iframe">7.3</div>
         </div>
       </section>
     </nav>
@@ -181,6 +182,8 @@
         for (let elem = 0; elem < elems.length; elem++) {
           elems[elem].style = "";
         }
+        document.querySelector("#player-version-title").onclick = null;
+        document.querySelector("#player-version-title").style.cursor = "";
       }
       function setVString(version, missing) {
         let vMaj = version.substr(0,1);
@@ -220,6 +223,10 @@
       }
       function styleElemIFrame(elem) {
           styleElem(elem, false);
+          document.querySelector("#player-version-title").style.cursor = "pointer";
+          document.querySelector("#player-version-title").onclick = function(){
+              window.open(elem.textContent);
+          };
           iframe.src= elem.textContent + "/index.html";
           container.appendChild(iframe);
       }
@@ -264,7 +271,8 @@
             whatsNewScreenByVersionMa7Mi0: ["2021", "{{0}} Drei zusätzliche Züge: Thalys, Regionalzug und Straßenbahn.", "{{0}} Zentrale Abstellgleise sind nutzbar.", "{{0}} Option, den Zustand des Spieles zu speichern.", "Fehlerkorrekturen."], whatsNewScreenByVersionMa7Mi0Hints: ["Der heutige Multiplay-Server ist inkompatibel mit dieser Version."],
             whatsNewScreenByVersionMa7Mi1: ["2021", "Entfernen des Material Design Lite."], whatsNewScreenByVersionMa7Mi1Hints: ["Der heutige Multiplay-Server ist inkompatibel mit dieser Version."],
             whatsNewScreenByVersionMa7Mi2: ["2021", "{{0}} Mehrspielermodus: Text-Chat."], whatsNewScreenByVersionMa7Mi2Hints: ["Der heutige Multiplay-Server ist inkompatibel mit dieser Version."],
-            whatsNewScreenByVersionMa7Mi3: ["2021", "Verbesserte Zugstrecken", "Verbessertes Rangieren", "Verbesserte Zoomgesten"]
+            whatsNewScreenByVersionMa7Mi3: ["2021", "Verbesserte Zugstrecken", "Verbessertes Rangieren", "Verbesserte Zoomgesten"],
+            whatsNewScreenByVersionMa7Mi4: ["2022","Größe Darstellung des Optionsmenüs und der klassischen Steuerelemente auf kleinen Bildschirmen.","Verbesserte klassische Steuerelemente.","Fehlerkorrekturen."]
           }, "en" : {
             whatsNewScreenByVersionMa1Mi0: ["2011", "First release featuring steam locomotive."], whatsNewScreenByVersionMa1Mi0Hints: ["Steam locomotive starts only if transformer is used."],
             whatsNewScreenByVersionMa2Mi0: ["2011", "{{0}}TGV Duplex.", "{{0}}First car."], whatsNewScreenByVersionMa2Mi0Hints: ["Steam locomotive starts only if transformer is used.", "TGV runs always.", "Cars start if red bus is clicked (beneath train station)."],
@@ -287,7 +295,8 @@
             whatsNewScreenByVersionMa7Mi0: ["2021", "{{0}} Three additional trains: Thalys, local train and street car.", "{{0}} Central sidings may be used.", "{{0}} Option to save game state.", "Bugfixes."], whatsNewScreenByVersionMa7Mi0Hints: ["Today's multiplay server is incompatible with this version."],
             whatsNewScreenByVersionMa7Mi1: ["2021", "Remove Material Design Lite dependency."], whatsNewScreenByVersionMa7Mi1Hints: ["Today's multiplay server is incompatible with this version."],
             whatsNewScreenByVersionMa7Mi2: ["2021", "{{0}} Multiplayer: Text chat."], whatsNewScreenByVersionMa7Mi2Hints: ["Today's multiplay server is incompatible with this version."],
-            whatsNewScreenByVersionMa7Mi3: ["2021", "Improved train paths", "Improved shunting", "Improved zoom gestures"]
+            whatsNewScreenByVersionMa7Mi3: ["2021", "Improved train paths", "Improved shunting", "Improved zoom gestures"],
+            whatsNewScreenByVersionMa7Mi4: ["2022","Bigger menu and \"Classic UI\" display on small screens.","Improved \"Classic UI\".","Bugfixes."]
           }
       };
       const defLang = "en";
