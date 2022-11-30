@@ -290,7 +290,7 @@
             const loadElem = findLoadElem(window.location.hash.replace("#", ""));
             //SWF
             window.RufflePlayer = window.RufflePlayer || {};
-            window.RufflePlayer.config = {menu: false};
+            window.RufflePlayer.config = {contextMenu: false, menu: false};
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
             const elemsSWF = document.querySelectorAll("#player-nav .version-swf");
