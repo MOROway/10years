@@ -8,6 +8,28 @@
         <link rel="stylesheet" href="../common.css" />
         <title>10 Years MOROway App</title>
         <style>
+            #timeline {
+                display: flex;
+                max-width: 100vw;
+                overflow-x: auto;
+            }
+            #timeline > div {
+                margin: 20px;
+                flex-grow: 1;
+            }
+            #timeline .version span {
+                content: " ";
+                width: 10px;
+                height: 10px;
+                display: inline-block;
+                margin: 2px;
+                border-radius: 50%;
+            }
+            #timeline .version span.minor {
+                width: 5px;
+                height: 5px;
+            }
+
             #player {
                 width: 100%;
                 display: flex;
@@ -116,6 +138,7 @@
             <div id="share-dialog-url"></div>
             <div id="share-dialog-close">X</div>
         </div>
+        <div id="timeline"></div>
         <div id="player"></div>
         <div id="player-version">
             <div id="player-version-title"></div>
@@ -269,6 +292,20 @@
                 }
                 return elems[0].textContent;
             }
+            function setTimeline(elem, color) {
+                try {
+                    var vMin = elem.textContent.substr(2, 1);
+                    var year = elem.parentNode.parentNode.querySelector("h3").textContent;
+                    var yearElem = document.createElement("span");
+                    yearElem.style.backgroundColor = color;
+                    if (vMin != 0) {
+                        yearElem.className = "minor";
+                    }
+                    document.querySelector("#timeline-versions-" + year).appendChild(yearElem);
+                } catch (e) {
+                    console.error(e);
+                }
+            }
             //I18N
             const strings = {
                 de: {
@@ -288,13 +325,28 @@
             }
             const container = document.getElementById("player");
             const loadElem = findLoadElem(window.location.hash.replace("#", ""));
+            //Timeline
+            var yearStart = 2011;
+            var yearEnd = new Date().getFullYear();
+            for (let year = yearStart; year <= yearEnd; year++) {
+                var yearElem = document.createElement("div");
+                var yearElemTitle = document.createElement("div");
+                yearElemTitle.textContent = year;
+                yearElemVersions = document.createElement("div");
+                yearElemVersions.id = "timeline-versions-" + year;
+                yearElemVersions.className = "version";
+                yearElem.appendChild(yearElemTitle);
+                yearElem.appendChild(yearElemVersions);
+                document.querySelector("#timeline").appendChild(yearElem);
+            }
             //SWF
             window.RufflePlayer = window.RufflePlayer || {};
-            window.RufflePlayer.config = {contextMenu: false, menu: false};
+            window.RufflePlayer.config = {contextMenu: "off", menu: false};
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
             const elemsSWF = document.querySelectorAll("#player-nav .version-swf");
             for (let elem = 0; elem < elemsSWF.length; elem++) {
+                setTimeline(elemsSWF[elem], "#fff566");
                 if (elemsSWF[elem].textContent == loadElem) {
                     styleElemSWF(elemsSWF[elem]);
                 }
@@ -307,6 +359,7 @@
             img.src = "missing.png";
             const elemsMissing = document.querySelectorAll("#player-nav .version-missing");
             for (let elem = 0; elem < elemsMissing.length; elem++) {
+                setTimeline(elemsMissing[elem], "#ff4554");
                 if (elemsMissing[elem].textContent == loadElem) {
                     styleElemMissing(elemsMissing[elem]);
                 }
@@ -318,6 +371,7 @@
             const iframe = document.createElement("iframe");
             const elemsIFrame = document.querySelectorAll("#player-nav .version-iframe");
             for (let elem = 0; elem < elemsIFrame.length; elem++) {
+                setTimeline(elemsIFrame[elem], "#66ff44");
                 if (elemsIFrame[elem].textContent == loadElem) {
                     styleElemIFrame(elemsIFrame[elem]);
                 }
