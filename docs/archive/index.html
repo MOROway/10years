@@ -95,6 +95,9 @@
             #player-nav .version-iframe {
                 cursor: pointer;
             }
+            body.wait #player-nav .version-swf {
+                cursor: wait;
+            }
             #player-nav .section-inner {
                 display: flex;
                 overflow-x: auto;
@@ -286,9 +289,13 @@
                 container.appendChild(img);
             }
             function styleElemSWF(elem) {
-                styleElem(elem, false);
-                container.appendChild(player);
-                player.load("./swf/" + elem.textContent + ".swf");
+                if (ruffleReady) {
+                    ruffleReady = false;
+                    document.body.classList.add("wait");
+                    styleElem(elem, false);
+                    container.appendChild(player);
+                    player.load("./swf/" + elem.textContent + ".swf");
+                }
             }
             function findLoadElem(loadElem) {
                 let elems = document.querySelectorAll(".section-inner > *");
@@ -347,10 +354,15 @@
                 document.querySelector("#timeline").appendChild(yearElem);
             }
             //SWF
+            var ruffleReady = true;
             window.RufflePlayer = window.RufflePlayer || {};
             window.RufflePlayer.config = {contextMenu: "off", menu: false};
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
+            player.addEventListener("loadeddata", function () {
+                ruffleReady = true;
+                document.body.classList.remove("wait");
+            });
             const elemsSWF = document.querySelectorAll("#player-nav .version-swf");
             for (let elem = 0; elem < elemsSWF.length; elem++) {
                 setTimeline(elemsSWF[elem], "#fff566");
