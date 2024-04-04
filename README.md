@@ -22,10 +22,10 @@ Apache 2.0 or CC-BY-4.0 (you may choose).
 ## Directory structure
 
 * assets: GIMP files for website images and animation images for the website's gif
-* docs: celebration website
-    * docs/index.html: Welcome site
-    * docs/archive/index.html: Release history site
-        * docs/archive/swf and docs/archive/ruffle: The first versions were created by Adobe Flash. Ruffle is a flash emulator serving the MOROway App SWF files.
-        * docs/archive/5.0+: Native HTML5/JS code. Embedded via iframe.
-    * docs/credits/index.html: Credits site (Overview over the above LICENSES)
-    * docs/NotoSans: Web font
+* ~~docs: celebration website~~ (moved to [MOROway.github.io](https://github.com/MOROway/MOROway.github.io) repository)
+  * ~~docs/index.html: Welcome site~~
+  * ~~docs/archive/index.html: Release history site~~
+    * ~~docs/archive/swf and docs/archive/ruffle: The first versions were created by Adobe Flash. Ruffle is a flash emulator serving the MOROway App SWF files.~~
+    * ~~docs/archive/5.0+: Native HTML5/JS code. Embedded via iframe.~~
+  * ~~docs/credits/index.html: Credits site (Overview over the above LICENSES)~~
+  * ~~docs/NotoSans: Web font~~
